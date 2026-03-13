@@ -624,7 +624,6 @@ async def admin_panel(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
 
 # ── O'QUVCHINI O'CHIRISH ─────────────────
 async def admin_delete_list(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
-    """O'quvchilar ro'yxatini ko'rsatish"""
     query = update.callback_query
     await query.answer()
     if not is_admin(query.from_user.id):
@@ -663,7 +662,6 @@ async def admin_delete_list(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     )
 
 async def admin_delete_ask(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
-    """Tanlangan o'quvchini tasdiqlash"""
     query = update.callback_query
     await query.answer()
     if not is_admin(query.from_user.id):
@@ -695,7 +693,6 @@ async def admin_delete_ask(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     )
 
 async def admin_delete_confirm(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
-    """O'quvchini bazadan o'chirish"""
     query = update.callback_query
     await query.answer()
     if not is_admin(query.from_user.id):
@@ -713,14 +710,12 @@ async def admin_delete_confirm(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
 
     name, phone, lvl = row
 
-    # Barcha ma'lumotlarni o'chirish
     c.execute("DELETE FROM users        WHERE user_id=?", (target_uid,))
     c.execute("DELETE FROM attendance   WHERE user_id=?", (target_uid,))
     c.execute("DELETE FROM tasks        WHERE user_id=?", (target_uid,))
     c.execute("DELETE FROM test_results WHERE user_id=?", (target_uid,))
     conn.commit(); conn.close()
 
-    # O'quvchiga xabar yuborish
     try:
         await ctx.bot.send_message(
             target_uid,
@@ -1056,14 +1051,12 @@ def main():
         fallbacks=[CommandHandler("cancel", cancel)],
     )
 
-    # ✅ Handler tartibiga e'tibor bering!
     app.add_handler(reg_conv)
     app.add_handler(absent_conv)
     app.add_handler(task_conv)
     app.add_handler(broadcast_conv)
     app.add_handler(test_add_conv)
 
-    # ✅ O'chirish handlerlari — oddiy CallbackQueryHandler (ConversationHandler emas!)
     app.add_handler(CallbackQueryHandler(admin_delete_list,    pattern="^adm_delete$"))
     app.add_handler(CallbackQueryHandler(admin_delete_ask,     pattern="^delstu_"))
     app.add_handler(CallbackQueryHandler(admin_delete_confirm, pattern="^delyes_"))
@@ -1086,8 +1079,4 @@ def main():
 
 
 if __name__ == "__main__":
-    if sys.platform == "win32":
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
     main()
