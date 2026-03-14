@@ -22,7 +22,7 @@ from telegram.ext import (
 # ══════════════════════════════════════════
 #              SOZLAMALAR
 # ══════════════════════════════════════════
-BOT_TOKEN    = "8686865318:AAEK4NOQjJDOlCqLKfnEaPrbgmzww8ga0Ao"
+BOT_TOKEN    = "8686865318:AAGze7m7oSu7y6B_jiS6V1Unuhkmez-yF6I"
 CHANNEL_ID   = "@dasturchilar_uchun_foydali"
 ADMIN_IDS    = [7160654862]
 TEACHER_NAME = "Zokirov Raxmatillo"
