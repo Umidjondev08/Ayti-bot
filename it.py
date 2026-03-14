@@ -22,7 +22,7 @@ from telegram.ext import (
 # ══════════════════════════════════════════
 #              SOZLAMALAR
 # ══════════════════════════════════════════
-BOT_TOKEN    = "8686865318:AAGze7m7oSu7y6B_jiS6V1Unuhkmez-yF6I"
+BOT_TOKEN    = "8686865318:AAGiECCZxuxo8JYjEWb7HpbQpazK_7rW-60"
 CHANNEL_ID   = "@dasturchilar_uchun_foydali"
 ADMIN_IDS    = [7160654862]
 TEACHER_NAME = "Zokirov Raxmatillo"
@@ -417,7 +417,8 @@ async def task_receive(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     elif msg.video:    file_id, file_type = msg.video.file_id, "video"
     elif msg.text:     file_type, caption = "text", msg.text
     else:
-        await update.message.reply_text("Bu turdagi fayl qabul qilinmaydi."); return TASK_WAIT
+        await update.message.reply_text("Bu turdagi fayl qabul qilinmaydi.")
+        return TASK_WAIT
 
     conn = db(); c = conn.cursor()
     c.execute("INSERT INTO tasks (user_id,file_id,file_type,caption,submitted_at) VALUES (?,?,?,?,?)",
